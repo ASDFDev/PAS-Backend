@@ -14,6 +14,6 @@ database adminstration skills.
 Place all php files inside `/var/www/html/` and we are *almost* ready to go. 
 
 ## Setting up the DB
-This authentication used for this project is insecure by default(I'm using it behind my network, so it's ok for me). Make sure you change the username and password in 
+This authentication used for this project is insecure by default(I'm using it behind my network, so it's ok for me). Make sure you change the username and password in AttendanceCodeAuthentication.php. 
 
-AttendanceCodeAuthentication.php. Create a database named `ats_attendance` and a table named `ats`. Inside the table, there should be 3 fields(`device_id`, `username`, `attendance_code`). 
+Create a database named `ats_attendance` and a table named `ats`. Inside the table, there should be 3 fields(`device_id`, `username`, `attendance_code`). 
