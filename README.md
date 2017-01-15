@@ -8,7 +8,7 @@ database adminstration skills.
 
 > Note: I am using a LAMP stack, you may use a WAMP stack if you wish.
 
-* MariabDB(You may use other DB, however, they are not supported)
+* MariaDB(You may use other DB, however, they are not supported)
 * phpMyAdmin(Optional)
 
 Place all php files inside `/var/www/html/` and we are *almost* ready to go. 
