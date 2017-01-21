@@ -21,4 +21,4 @@ Create a database named `ats_attendance` and a table named `ats`. Inside the tab
 
 ## Reading Server Output
 
-You can either read the server output by reading http_response_code or [HttpResponse](https://hc.apache.org/httpcomponents-core-ga/httpcore/apidocs/org/apache/http/HttpResponse.html). 
+You can either read the server output by reading http_response_code or through json output.
