@@ -1,7 +1,7 @@
 <?php
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
- include 'auth/AttendanceAuth.php';
+ require 'auth/AttendanceAuth.php';
 
  $device_id = $_POST['device_id'];
  $username = $_POST['username'];

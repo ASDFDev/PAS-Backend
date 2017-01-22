@@ -1,6 +1,6 @@
 <?php
 
-include 'auth/AccountAuth.php';
+require 'auth/AccountAuth.php';
 
 $username = $_POST['username'];
 $password = $_POST['password'];
