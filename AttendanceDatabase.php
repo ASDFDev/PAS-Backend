@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
              $response["Operation"] = "Attendance submission";
              $response["Result"] = "Failed!";
              $response["Reason"] = "You have already submitted attendance code for this lesson!";
-             return json_encoded($response);
+             return json_encode($response);
          } else {
 
              $sql = "INSERT INTO ats (device_id,username,attendance_code) VALUES('$device_id','$username','$attendance_code')";
@@ -35,14 +35,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                  http_response_code(200);
                  $response["Operation"] = "Attendance submission";
                  $response["Result"] = "Successful!";
-                 return json_encoded($response);
-
+                 return json_encode($response);
              } else {
                  // Internal Server Error
                  http_response_code(500);
-                 $response["Operation"] = "Attendance submission";
-                 $response["Result"] = "Failed!";
-                 $response["Reason"] = "Unable to insert to database. Please try again.";
              }
 
          }
@@ -55,10 +51,7 @@ else{
 	http_response_code(405);
     $response["Operation"] = "Database connection";
     $response["Result"] = "Unable to connect to database.";
-    // nasty hack
-    $a = "You are using: ";
-    $b = $_SERVER['REQUEST_METHOD'];
-    $c = "Please use POST instead.";
-    $response["Reason"] = $a . $b . $c;
+    $method = $_SERVER['REQUEST_METHOD'];
+    $response["Reason"] = "You are using: " . $method . "Please use POST instead.";
     return json_encode($response);
 }
