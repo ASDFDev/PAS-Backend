@@ -1,4 +1,6 @@
-<?php
+<!DOCTYPE html>
+<html>
+<body>
 
 /**
  * @copyright (c) 2017, Daniel Quah
@@ -19,7 +21,11 @@
  */
 
 
-    $i = 3;
-    $cstrong = 6;
-    $bytes = openssl_random_pseudo_bytes($i,$cstrong);
-    $hex   = bin2hex($bytes);
+        $attendance_code = mt_rand(00000,99999);
+        <p align="center">Attendance Code is: <?php echo $attendance_code;?> </p>
+
+
+</body>
+</html>
+
+
