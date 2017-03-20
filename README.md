@@ -1,6 +1,6 @@
 # ATS Backend
 
-This REST API is written to be used in conjuction with [ATS reboot](https://github.com/emansih/sp_ats_reboot). The setup assumes you have the neccessary system and database adminstration skills. 
+This REST API is written to be used in conjuction with [PAS-Quiet-Android](https://github.com/Proximity-Attendance-System/PAS-Quiet-Android). The setup assumes you have the neccessary system and database adminstration skills. 
 
 ## Software Requirement
 
@@ -17,7 +17,9 @@ Place all php files inside `/var/www/html/` and we are *almost* ready to go.
 
 This authentication used for this project is insecure by default(I'm using it behind my network, so it's ok for me). Make sure you change the username and password in AttendanceCodeAuthentication.php. 
 
-Create a database named `ats_attendance` and a table named `ats`. Inside the table, there should be 3 fields(`device_id`, `username`, `attendance_code`). 
+1. Create a database named `pas` with 2 tables named `attendance` and `accounts`. 
+2. Inside `attendance`, there should be 3 fields(`device_id`, `username`, `attendance_code`). 
+3. Inside `accounts`, there should be 2 fields(`username` and `password`).
 
 ## Reading Server Output
 
