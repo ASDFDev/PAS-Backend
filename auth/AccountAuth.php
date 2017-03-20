@@ -22,7 +22,7 @@
     define('HOST','localhost');
     define('USER', 'root');
     define('PASS', 'hunter2');
-    define('DB', 'ats_account');
+    define('DB', 'pas');
 
     $con = mysqli_connect(HOST,USER,PASS,DB);
 

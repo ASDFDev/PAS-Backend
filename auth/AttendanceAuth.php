@@ -21,8 +21,8 @@
 	define('HOST','localhost');
 	define('USER', 'root');
 	define('PASS', 'hunter2');
-	define('DB', 'ats_attendance');
-	
+	define('DB', 'pas');
+
 	$con = mysqli_connect(HOST,USER,PASS,DB);
 
 	if(!$con){

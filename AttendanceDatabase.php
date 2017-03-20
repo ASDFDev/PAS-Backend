@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      $response["Reason"] = "Missing input";
      return json_encode($response);
  }else {
-         $sql = "SELECT * FROM ats WHERE device_id='$device_id' OR username='$username'";
+         $sql = "SELECT * FROM attendance WHERE device_id='$device_id' OR username='$username'";
 
          $check = mysqli_fetch_array(mysqli_query($con, $sql));
 
@@ -47,7 +47,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
              return json_encode($response);
          } else {
 
-             $sql = "INSERT INTO ats (device_id,username,attendance_code) VALUES('$device_id','$username','$attendance_code')";
+             $sql = "INSERT INTO attendance (device_id,username,attendance_code) VALUES('$device_id','$username','$attendance_code')";
 
              if (mysqli_query($con, $sql)) {
                  // OK
