@@ -20,7 +20,7 @@ Place all files inside `/var/www/html/` and we are *almost* ready to go.
 
 ## Setting up the DB
 
-This authentication used for this project is insecure by default(I'm using it behind my network, so it's ok for me). Make sure you change the username and password in [auth/AttendanceCodeAuthentication.php](auth/AttendanceCodeAuthentication.php). 
+This authentication used for this project is insecure by default(I'm using it behind my network, so it's ok for me). Make sure you change the username and password in [auth/AttendanceAuth.php](auth/AttendanceAuth.php). 
 
 1. Create a database named `pas` with 2 tables named `attendance` and `accounts`. 
 2. Inside `attendance`, there should be 3 fields(`device_id`, `username` and `attendance_code`). 
