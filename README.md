@@ -16,15 +16,15 @@ This REST API is written for Proximity Attendance System. Software using this AP
 * Apache
 * composer
 
-Place all php files inside `/var/www/html/` and we are *almost* ready to go. 
+Place all files inside `/var/www/html/` and we are *almost* ready to go. 
 
 ## Setting up the DB
 
-This authentication used for this project is insecure by default(I'm using it behind my network, so it's ok for me). Make sure you change the username and password in AttendanceCodeAuthentication.php. 
+This authentication used for this project is insecure by default(I'm using it behind my network, so it's ok for me). Make sure you change the username and password in [auth/AttendanceCodeAuthentication.php](auth/AttendanceCodeAuthentication.php). 
 
 1. Create a database named `pas` with 2 tables named `attendance` and `accounts`. 
-2. Inside `attendance`, there should be 3 fields(`device_id`, `username`, `attendance_code`). 
-3. Inside `accounts`, there should be 2 fields(`username` and `password`).
+2. Inside `attendance`, there should be 3 fields(`device_id`, `username` and `attendance_code`). 
+3. Inside `accounts`, there should be 3 fields(`username` , `password` and `role`).
 
 ## Setting up using composer
 ```bash
