@@ -6,10 +6,11 @@ This REST API is written to be used in conjuction with [PAS-Quiet-Android](https
 
 > Note: I am using a LAMP stack, WAMP stack is no longer supported. 
 
-* MariaDB(You may use other DB, however, they are not supported)
+* MariaDB
 * php7
 * phpMyAdmin(Optional)
 * Apache
+* composer
 
 Place all php files inside `/var/www/html/` and we are *almost* ready to go. 
 
@@ -21,6 +22,29 @@ This authentication used for this project is insecure by default(I'm using it be
 2. Inside `attendance`, there should be 3 fields(`device_id`, `username`, `attendance_code`). 
 3. Inside `accounts`, there should be 2 fields(`username` and `password`).
 
+## Setting up using composer
+```bash
+$ composer require spomky-labs/otphp
+$ composer require symfony/polyfill-php70
+```
+
+## Getting your attendance code 2 different ways
+1. Through pseudo-randomness[(/dev/urandom)](token/GenerateAttendanceCode.php)
+2. Through Time Based One Time Password(Read on if you are using this)
+
+## Generate your own secret
+First we have to generate our own secret key
+```bash
+$ php token/totp/GenSecret.php
+
+Secret Key: XICHOBVO3OM5MSGL
+```
+This secret key will appear only **once**. Go to token/totp/OTP.php and find `"xxxx" // Input your secret key here!`.
+Replace xxxx with your key. 
+
 ## Reading Server Output
 
 You can either read the server output by reading http_response_code or through json output.
+
+
+ 
