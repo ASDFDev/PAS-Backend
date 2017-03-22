@@ -1,6 +1,10 @@
-# ATS Backend
+# PAS Backend
 
-This REST API is written to be used in conjuction with [PAS-Quiet-Android](https://github.com/Proximity-Attendance-System/PAS-Quiet-Android). The setup assumes you have the neccessary system and database adminstration skills. 
+This REST API is written for Proximity Attendance System. Software using this API
+
+* [PAS-Quiet-Android](https://github.com/Proximity-Attendance-System/PAS-Quiet-Android)
+* [PAS-Quiet-iOS](https://github.com/Proximity-Attendance-System/PAS-Quiet-iOS)
+
 
 ## Software Requirement
 
