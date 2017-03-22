@@ -4,10 +4,10 @@ This REST API is written to be used in conjuction with [PAS-Quiet-Android](https
 
 ## Software Requirement
 
-> Note: I am using a LAMP stack, you may use a WAMP stack if you wish.
+> Note: I am using a LAMP stack, WAMP stack is no longer supported. 
 
 * MariaDB(You may use other DB, however, they are not supported)
-* php≥5
+* php7
 * phpMyAdmin(Optional)
 * Apache
 
