@@ -37,14 +37,11 @@ $ composer require symfony/polyfill-php70
 2. Through Time Based One Time Password(Read on if you are using this)
 
 ## Generate your own secret
-First we have to generate our own secret key
 ```bash
 $ php token/totp/GenSecret.php
 
 Secret Key: XICHOBVO3OM5MSGL
 ```
-This secret key will appear only **once**. Go to token/totp/OTP.php and find `"xxxx" // Input your secret key here!`.
-Replace xxxx with your key. 
 
 ## Reading Server Output
 
