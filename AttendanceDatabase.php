@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
      $response["Operation"] = "Attendance submission";
      $response["Result"] = "Failed!";
      $response["Reason"] = "Missing input";
-     return json_encode($response);
+     echo json_encode($response);
  }else {
          $sql = "SELECT * FROM attendance WHERE device_id='$device_id' OR username='$username'";
 
@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
              $response["Operation"] = "Attendance submission";
              $response["Result"] = "Failed!";
              $response["Reason"] = "You have already submitted attendance code for this lesson!";
-             return json_encode($response);
+             echo json_encode($response);
          } else {
 
              $sql = "INSERT INTO attendance (device_id,username,attendance_code) VALUES('$device_id','$username','$attendance_code')";
@@ -54,7 +54,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                  http_response_code(200);
                  $response["Operation"] = "Attendance submission";
                  $response["Result"] = "Successful!";
-                 return json_encode($response);
+                 echo json_encode($response);
              } else {
                  // Internal Server Error
                  http_response_code(500);
@@ -72,5 +72,5 @@ else{
     $response["Result"] = "Unable to connect to database.";
     $method = $_SERVER['REQUEST_METHOD'];
     $response["Reason"] = "You are using: " . $method . "Please use POST instead.";
-    return json_encode($response);
+    echo json_encode($response);
 }
