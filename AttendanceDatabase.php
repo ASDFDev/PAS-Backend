@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
  $device_id = $_POST['device_id'];
  $username = $_POST['username'];
  $attendance_code = $_POST['attendance_code'];
+ $timestamp = date(DATE_RFC2822);
 
  if($device_id == '' || $username == '' || $attendance_code == ''){
      // Bad Request
@@ -47,7 +48,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
              echo json_encode($response);
          } else {
 
-             $sql = "INSERT INTO attendance (device_id,username,attendance_code) VALUES('$device_id','$username','$attendance_code')";
+             $sql = "INSERT INTO attendance (device_id,username,attendance_code, timestamp) VALUES('$device_id','$username','$attendance_code', $timestamp)";
 
              if (mysqli_query($con, $sql)) {
                  // OK
@@ -71,6 +72,6 @@ else{
     $response["Operation"] = "Database connection";
     $response["Result"] = "Unable to connect to database.";
     $method = $_SERVER['REQUEST_METHOD'];
-    $response["Reason"] = "You are using: " . $method . "Please use POST instead.";
+    $response["Reason"] = "You are using: " . $method . ".Please use POST instead.";
     echo json_encode($response);
 }
