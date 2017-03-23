@@ -1,5 +1,6 @@
-<!--
+<?php
 
+/*
   @copyright (c) 2017, Daniel Quah
   @author Daniel Quah
   @license AGPL-3.0
@@ -16,9 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>
  
  
--->
-
-<?php 
+*/
 
 function getAttendanceCode($bytes)
 {
