@@ -28,8 +28,7 @@ This authentication used for this project is insecure by default(I'm using it be
 
 ## Setting up using composer
 ```bash
-$ composer require spomky-labs/otphp
-$ composer require symfony/polyfill-php70
+$ composer update
 ```
 
 ## Getting your attendance code 2 different ways
