@@ -18,9 +18,13 @@
  *
 */
 
+use OTPHP\TOTP;
+
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
  require 'auth/AttendanceAuth.php';
+ require_once __DIR__ . 'vendor/autoload.php';
 
  $device_id = $_POST['device_id'];
  $username = $_POST['username'];
@@ -47,19 +51,38 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
              $response["Reason"] = "You have already submitted attendance code for this lesson!";
              echo json_encode($response);
          } else {
+             $open_secretfile = fopen("secret.txt", "r");
+             $secret = fgets($open_secretfile);
 
-             $sql = "INSERT INTO attendance (device_id,username,attendance_code, timestamp) VALUES('$device_id','$username','$attendance_code', $timestamp)";
+             $totp = new TOTP(
+                 "PAS",
+                 $secret,
+                 20,
+                 'sha512',
+                 8
+             );
 
-             if (mysqli_query($con, $sql)) {
-                 // OK
-                 http_response_code(200);
-                 $response["Operation"] = "Attendance submission";
-                 $response["Result"] = "Successful!";
-                 echo json_encode($response);
-             } else {
-                 // Internal Server Error
-                 http_response_code(500);
+             if(($totp ->now()) == $attendance_code) {
+                 $sql = "INSERT INTO attendance (device_id,username,attendance_code, timestamp) VALUES('$device_id','$username','$attendance_code', $timestamp)";
+
+                 if (mysqli_query($con, $sql)) {
+                     // OK
+                     http_response_code(200);
+                     $response["Operation"] = "Attendance submission";
+                     $response["Result"] = "Successful!";
+                     echo json_encode($response);
+                 } else {
+                     // Internal Server Error
+                     http_response_code(500);
+                 }
              }
+             else {
+                     // User did not submit the code on time,generate new code again
+                     $response["Operation"] = "Attendance submission";
+                     $response["Result"] = "Failed!";
+                     $response["Reason"] = "Token has already changed";
+                     echo json_encode($response);
+                 }
 
          }
          mysqli_close($con);

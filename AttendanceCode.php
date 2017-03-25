@@ -37,16 +37,25 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
         );
 
         $totp->setIssuer('Setsuna');
-        echo "Current OTP: ", $totp->now(), PHP_EOL;
+        $response["Operation"] = "Retrieving attendance code";
+        $response["Result"] = $totp->now();
+        $response["Method"] = "Time based";
+        echo json_encode($response);
+
         fclose($open_secretfile);
     } else {
-        echo getAttendanceCode(256);
+
+        $response["Operation"] = "Retrieving attendance code";
+        $response["Result"] = getAttendanceCode(256);
+        $response["Method"] = "/dev/urandom";
+        echo json_encode($response);
+
     }
 
 } else {
     http_response_code(405);
     $response["Operation"] = "Retrieving attendance code";
-    $response["Result"] = "Unable process";
+    $response["Result"] = "Unable to process";
     $method = $_SERVER['REQUEST_METHOD'];
     $response["Reason"] = "You are using: " . $method . ".Please use GET instead.";
     echo json_encode($response);
