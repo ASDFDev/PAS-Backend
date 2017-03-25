@@ -1,7 +1,7 @@
 <?php
 
 /*
-  @copyright (c) 2017, Daniel Quah
+  @copyright (c) 2017, ASDF Development
   @author Daniel Quah
   @license AGPL-3.0
   This code is free software: you can redistribute it and/or modify
@@ -13,7 +13,7 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
   GNU Affero General Public License for more details.
 
-  You should have received a copy of the GNU Affero General Public License, ver$
+  You should have received a copy of the GNU Affero General Public License, version 3
   along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 */
@@ -21,7 +21,7 @@ use OTPHP\TOTP;
 
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    require_once __DIR__ . '/../../vendor/autoload.php';
+    require_once __DIR__ . 'vendor/autoload.php';
     $secretfile = 'secret.txt';
     if (file_exists($secretfile)) {
 
