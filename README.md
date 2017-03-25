@@ -31,13 +31,9 @@ This authentication used for this project is insecure by default(I'm using it be
 $ composer update
 ```
 
-## Getting your attendance code 2 different ways
-1. Through pseudo-randomness[(/dev/urandom)](token/GenerateAttendanceCode.php)
-2. Through Time Based One Time Password(Read on if you are using this)
-
 ## Generate your own secret
 ```bash
-$ php token/totp/GenSecret.php
+$ php GenSecret.php
 
 Secret Key: XICHOBVO3OM5MSGL
 ```
