@@ -1,7 +1,7 @@
 <?php
 
 /*
-  @copyright (c) 2017, Daniel Quah
+  @copyright (c) 2017, ASDF Development
   @author Daniel Quah
   @license AGPL-3.0
   This code is free software: you can redistribute it and/or modify
