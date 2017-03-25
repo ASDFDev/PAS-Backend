@@ -1,4 +1,4 @@
 /.idea/
 composer.lock
 /vendor/
-/token/totp/secret.txt
+/secret.txt
