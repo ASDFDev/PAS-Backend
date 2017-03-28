@@ -18,18 +18,23 @@
  *
 */
 
-use OTPHP\TOTP;
 
+/* TODO: Only lecturer is allowed here
+         Lecturer should send the data using json, will need to add parsing logic
+*/
+
+$device_id = $_POST['device_id'];
+$username = $_POST['username'];
+$attendance_code = $_POST['attendance_code'];
+$timestamp = date(DATE_RFC2822);
+$method = $_SERVER['REQUEST_METHOD'];
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
  require 'auth/AttendanceAuth.php';
  require_once __DIR__ . 'vendor/autoload.php';
 
- $device_id = $_POST['device_id'];
- $username = $_POST['username'];
- $attendance_code = $_POST['attendance_code'];
- $timestamp = date(DATE_RFC2822);
+ include ("AttendanceCode.php");
 
  if($device_id == '' || $username == '' || $attendance_code == ''){
      // Bad Request
@@ -51,19 +56,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
              $response["Reason"] = "You have already submitted attendance code for this lesson!";
              echo json_encode($response);
          } else {
-             $open_secretfile = fopen("secret.txt", "r");
-             $secret = fgets($open_secretfile);
 
-             $totp = new TOTP(
-                 "PAS",
-                 $secret,
-                 20,
-                 'sha512',
-                 8
-             );
+             $AttendanceCode = new AttendanceCode();
+             $code = $AttendanceCode->getAttendanceCode();
 
-             if(($totp ->now()) == $attendance_code) {
-                 $sql = "INSERT INTO attendance (device_id,username,attendance_code, timestamp) VALUES('$device_id','$username','$attendance_code', $timestamp)";
+             if($code == $attendance_code) {
+                 $sql = "INSERT INTO attendance (device_id,username,attendance, timestamp) VALUES('$device_id','$username','present', $timestamp)";
 
                  if (mysqli_query($con, $sql)) {
                      // OK
@@ -74,6 +72,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                  } else {
                      // Internal Server Error
                      http_response_code(500);
+                     $response["Operation"] = "Attendance Submission";
+                     $response["Result"] = "Unable to insert code";
+                     $response["Reason"] = "Internal server error";
+                     echo json_encode($response);
                  }
              }
              else {
@@ -94,7 +96,8 @@ else{
 	http_response_code(405);
     $response["Operation"] = "Database connection";
     $response["Result"] = "Unable to connect to database.";
-    $method = $_SERVER['REQUEST_METHOD'];
     $response["Reason"] = "You are using: " . $method . ".Please use POST instead.";
     echo json_encode($response);
 }
+
+?>

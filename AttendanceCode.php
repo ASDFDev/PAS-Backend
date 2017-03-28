@@ -19,76 +19,36 @@
 */
 use OTPHP\TOTP;
 
-if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    require_once __DIR__ . 'vendor/autoload.php';
-    $secretfile = 'secret.txt';
-    if (file_exists($secretfile)) {
-
-        $open_secretfile = fopen("secret.txt", "r");
-        $secret = fgets($open_secretfile);
-
-        $totp = new TOTP(
-            "PAS",
-            $secret,
-            20,
-            'sha512',
-            8
-        );
-
-        $totp->setIssuer('Setsuna');
-        $response["Operation"] = "Retrieving attendance code";
-        $response["Result"] = $totp->now();
-        $response["Method"] = "Time based";
-        echo json_encode($response);
-
-        fclose($open_secretfile);
-    } else {
-
-        $response["Operation"] = "Retrieving attendance code";
-        $response["Result"] = getAttendanceCode(256);
-        $response["Method"] = "/dev/urandom";
-        echo json_encode($response);
-
-    }
-
-} else {
-    http_response_code(405);
-    $response["Operation"] = "Retrieving attendance code";
-    $response["Result"] = "Unable to process";
-    $method = $_SERVER['REQUEST_METHOD'];
-    $response["Reason"] = "You are using: " . $method . ".Please use GET instead.";
-    echo json_encode($response);
-
-}
+require_once __DIR__ . 'vendor/autoload.php';
 
 
-function getAttendanceCode($bytes)
+class AttendanceCode
 {
-    $readUrandom = @fopen('/dev/urandom','rb');
-    $attendanceCode = '';
-    if ($readUrandom !== FALSE) {
-        $attendanceCode .= @fread($readUrandom, $bytes);
-        @fclose($readUrandom);
-    }
-    else
+    function getAttendanceCode()
     {
-        trigger_error('Insufficient entropy!');
+
+        $secretfile = 'secret.txt';
+        if (file_exists($secretfile)) {
+
+            $open_secretfile = fopen("secret.txt", "r");
+            $secret = fgets($open_secretfile);
+
+            $totp = new TOTP(
+                "PAS",
+                $secret,
+                20,
+                'sha512',
+                8
+            );
+            $code = $totp -> now;
+            fclose($open_secretfile);
+        }
+        return $this -> $code;
     }
-
-    // Convert to string from binary
-    $attendanceCode = base64_encode($attendanceCode);
-
-    // remove none url chars
-    $attendanceCode = strtr($attendanceCode, '+/', '-_');
-
-    // Remove "=" from string
-    $attendanceCode = str_replace('=', ' ', $attendanceCode);
-
-    // Get the first 10 char from urandom
-    $attendanceCode = substr($attendanceCode,0,10);
-
-    return $attendanceCode;
 }
+
+
+
 
 ?>
