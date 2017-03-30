@@ -20,32 +20,25 @@
 use OTPHP\TOTP;
 
 
-require_once __DIR__ . 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-
-class AttendanceCode
+function getAttendanceCode()
 {
-    function getAttendanceCode()
-    {
-
-        $secretfile = 'secret.txt';
-        if (file_exists($secretfile)) {
-
-            $open_secretfile = fopen("secret.txt", "r");
-            $secret = fgets($open_secretfile);
+        $open_secretfile = fopen("secret.txt", "r");
+        $secret = fgets($open_secretfile);
 // 8 digit code with SHA512 digest valid for 20s using secrets.txt as a seed
-            $totp = new TOTP(
-                "Setsuna",
-                $secret,
-                20,
-                'sha512',
-                8
-            );
-            $code = $totp -> now();
-            fclose($open_secretfile);
-        }
-        return $this -> $code;
-    }
+        $totp = new TOTP(
+            "Setsuna",
+            $secret,
+            20,
+            'sha512',
+            8
+        );
+        $code = $totp->now();
+        fclose($open_secretfile);
+
+       echo $code;
+       return $code;
 }
 
 

@@ -41,7 +41,7 @@ if ($username == '' || $password == ''){
   if(isset($check_staff)){
       //Valid Staff account
       $_SESSION["Role"] = "Lecturer";
-      header("location: http://localhost/SubmitAttendance");
+      header("location: /SubmitAttendance.php");
 
    }
    else{
@@ -49,7 +49,7 @@ if ($username == '' || $password == ''){
        if(isset($check_student)){
            //Valid Student account
            $_SESSION["Role"] = "Student";
-           header("location: http://localhost/GetAttendanceCode");
+           header("location: /GetAttendanceCode.php");
 
        } else{
            // Invalid Staff / student account

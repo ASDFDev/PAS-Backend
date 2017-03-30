@@ -29,14 +29,12 @@ $attendance_code = $_POST['attendance_code'];
 $timestamp = date(DATE_RFC2822);
 $method = $_SERVER['REQUEST_METHOD'];
 
-
 if($_SESSION["Role"] == "Lecturer") {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         require 'auth/AttendanceAuth.php';
         require_once __DIR__ . 'vendor/autoload.php';
-
-        include("AttendanceCode.php");
+        include 'AttendanceCode.php';
 
         if ($device_id == '' || $username == '' || $attendance_code == '') {
             // Bad Request
@@ -59,8 +57,7 @@ if($_SESSION["Role"] == "Lecturer") {
                 echo json_encode($response);
             } else {
 
-                $AttendanceCode = new AttendanceCode();
-                $code = $AttendanceCode->getAttendanceCode();
+                $code = getAttendanceCode();
 
                 if ($code == $attendance_code) {
                     $sql = "INSERT INTO attendance (device_id,username,attendance, timestamp) VALUES('$device_id','$username','present', $timestamp)";
@@ -96,11 +93,11 @@ if($_SESSION["Role"] == "Lecturer") {
         http_response_code(405);
         $response["Operation"] = "Database connection";
         $response["Result"] = "Unable to connect to database.";
-        $response["Reason"] = "You are using: " . $method . ".Please use POST instead.";
+        $response["Reason"] = "You are using: " . $method . ". Please use POST instead.";
         echo json_encode($response);
     }
 } else{
-    header("location: http://localhost/error.html");
+    header("location: /error.html");
 }
 
 ?>

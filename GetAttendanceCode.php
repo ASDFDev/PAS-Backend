@@ -2,9 +2,8 @@
 
 //TODO: Each student should use their own seed possibly through rng.
 
-$AttendanceCode = new AttendanceCode();
-$code = $AttendanceCode->getAttendanceCode();
+include 'AttendanceCode.php';
 
-echo $code;
+getAttendanceCode();
 
 ?>
