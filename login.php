@@ -32,17 +32,32 @@ if ($username == '' || $password == ''){
     $response["Reason"] = "Missing input!";
     echo json_encode($response);
 } else {
-  $sql = "SELECT * FROM accounts WHERE username='$username' AND password='$password'";
-  $check = mysqli_fetch_array(mysqli_query($con,$sql));
+  $staff = "SELECT * FROM staff WHERE username='$username' AND password='$password'";
+  $student = "SELECT * FROM student WHERE username='$username' AND password='$password'";
+  $check_staff = mysqli_fetch_array(mysqli_query($con,$staff));
+  $check_student = mysqli_fetch_array(mysqli_query($con,$student));
 
-  if(isset($check)){
-      //Valid user
-       header("location: http://google.com");
+  // Loop credentials through staff database before looping through student database
+  if(isset($check_staff)){
+      //Valid Staff account
+      header("location: http://google.com");
+
    }
    else{
-      //Invalid user
-      echo "Username or Password is invalid";
-      header("location:http://facebook.com");
+      // Check for student account
+       if(isset($check_student)){
+           //Valid Student account
+           header("location: http://localhost/GetAttendanceCode");
+
+       } else{
+           // Invalid Staff / student account
+           http_response_code(401);
+           $response["Operation"] = "Sign In";
+           $response["Result"] = "Failed!";
+           $response["Reason"] = "Invalid Credentials!";
+           echo json_encode($response);
+
+       }
   }
   mysqli_close($con);
 }

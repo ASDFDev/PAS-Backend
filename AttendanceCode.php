@@ -41,7 +41,7 @@ class AttendanceCode
                 'sha512',
                 8
             );
-            $code = $totp -> now;
+            $code = $totp -> now();
             fclose($open_secretfile);
         }
         return $this -> $code;

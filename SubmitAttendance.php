@@ -29,6 +29,7 @@ $attendance_code = $_POST['attendance_code'];
 $timestamp = date(DATE_RFC2822);
 $method = $_SERVER['REQUEST_METHOD'];
 
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
  require 'auth/AttendanceAuth.php';
