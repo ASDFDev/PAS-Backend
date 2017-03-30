@@ -40,13 +40,15 @@ if ($username == '' || $password == ''){
   // Loop credentials through staff database before looping through student database
   if(isset($check_staff)){
       //Valid Staff account
-      header("location: http://google.com");
+      $_SESSION["Role"] = "Lecturer";
+      header("location: http://localhost/SubmitAttendance");
 
    }
    else{
       // Check for student account
        if(isset($check_student)){
            //Valid Student account
+           $_SESSION["Role"] = "Student";
            header("location: http://localhost/GetAttendanceCode");
 
        } else{

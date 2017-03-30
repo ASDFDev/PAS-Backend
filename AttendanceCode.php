@@ -33,9 +33,9 @@ class AttendanceCode
 
             $open_secretfile = fopen("secret.txt", "r");
             $secret = fgets($open_secretfile);
-
+// 8 digit code with SHA512 digest valid for 20s using secrets.txt as a seed
             $totp = new TOTP(
-                "PAS",
+                "Setsuna",
                 $secret,
                 20,
                 'sha512',
