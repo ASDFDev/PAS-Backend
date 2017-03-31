@@ -99,6 +99,18 @@
 .container .info span .fa {
   color: #EF3B3A;
 }
+.controls label {
+  display: inline-block;
+  width: 90px;
+  height: 40px;
+  text-align: center;
+  vertical-align: top;
+  padding-top: 40px;
+}
+.controls input {
+  display: block;
+  margin: 0 auto -40px;
+}
 body {
   background: #76b852; /* fallback for old browsers */
   background: -webkit-linear-gradient(right, #76b852, #8DC26F);

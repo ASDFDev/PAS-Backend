@@ -22,6 +22,7 @@ session_start();
 
 $username = $_POST['username'];
 $password = $_POST['password'];
+$role_value = $_POST['role_selection'];
 
 require 'auth/AccountAuth.php';
 
@@ -37,30 +38,36 @@ if ($username == '' || $password == ''){
   $check_staff = mysqli_fetch_array(mysqli_query($con,$staff));
   $check_student = mysqli_fetch_array(mysqli_query($con,$student));
 
-  // Loop credentials through staff database before looping through student database
-  if(isset($check_staff)){
-      //Valid Staff account
-      $_SESSION["Role"] = "Lecturer";
-      header("location: /SubmitAttendance.php");
+  if($role_value == "staff"){
+        if(isset($check_staff)){
+            //Valid staff account
+            $_SESSION["Role"] = "Lecturer";
+            header("location: /SubmitAttendance.php");
+        } else {
+            // Invalid Staff account
+            http_response_code(401);
+            $response["Operation"] = "Sign In";
+            $response["Result"] = "Failed!";
+            $response["Reason"] = "Invalid Credentials!";
+            echo json_encode($response);
+            header("location: /error.html");
+        }
+ } else {
+     if(isset($check_student)){
+         //Valid student account
+         $_SESSION["Role"] = "Student";
+         header("location: /GetAttendanceCode.php");
+     } else{
+         // Invalid student account
+         http_response_code(401);
+         $response["Operation"] = "Sign In";
+         $response["Result"] = "Failed!";
+         $response["Reason"] = "Invalid Credentials!";
+         echo json_encode($response);
+         header("location: /error.html");
 
-   }
-   else{
-      // Check for student account
-       if(isset($check_student)){
-           //Valid Student account
-           $_SESSION["Role"] = "Student";
-           header("location: /GetAttendanceCode.php");
-
-       } else{
-           // Invalid Staff / student account
-           http_response_code(401);
-           $response["Operation"] = "Sign In";
-           $response["Result"] = "Failed!";
-           $response["Reason"] = "Invalid Credentials!";
-           echo json_encode($response);
-
-       }
-  }
+     }
+ }
   mysqli_close($con);
 }
 

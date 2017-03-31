@@ -21,9 +21,15 @@
 <title>ASDF Dev</title>
 <div class="login-page">
     <div class="form">
-        <form class="login-form">
-            <input type="text" name="username" placeholder="username"/>
-            <input type="password" name="password" placeholder="password"/>
+        <form autocomplete="off" class="login-form">
+            <input autocomplete="off" type="text" name="username" placeholder="username"/>
+            <input autocomplete="off" type="password" name="password" placeholder="password"/>
+            <div class="controls">
+                <label class="radio">
+                    <input type="radio" name="role_selection" value="staff">Staff</label>
+                <label class="radio">
+                    <input type="radio" name="role_selection" value="student" checked="checked">Student</label>
+            </div>
             <button formaction="/login.php" formmethod="post" id="button" name="submit" value="Sign In" type="submit">Submit</button>
         </form>
     </div>
