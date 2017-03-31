@@ -26,13 +26,7 @@ $role_value = $_POST['role_selection'];
 
 require 'auth/AccountAuth.php';
 
-if ($username == '' || $password == ''){
-    http_response_code(400);
-    $response["Operation"] = "Sign In";
-    $response["Result"] = "Failed!";
-    $response["Reason"] = "Missing input!";
-    echo json_encode($response);
-} else {
+
   $staff = "SELECT * FROM staff WHERE username='$username' AND password='$password'";
   $student = "SELECT * FROM student WHERE username='$username' AND password='$password'";
   $check_staff = mysqli_fetch_array(mysqli_query($con,$staff));
@@ -69,6 +63,6 @@ if ($username == '' || $password == ''){
      }
  }
   mysqli_close($con);
-}
+
 
 ?>
